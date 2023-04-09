@@ -1,5 +1,7 @@
 package com.anunay.designpattern.creational.builder;
 
+import java.security.InvalidParameterException;
+
 public class Student {
     private String name;
     private int age;
@@ -49,7 +51,17 @@ public class Student {
             return this;
         }
 
+        private boolean validate(){
+            if(this.age<18){
+               return false;
+            }
+            return true;
+        }
+
         public Student build(){
+            if(!validate()){
+                throw new InvalidParameterException("");
+            }
             return new Student(this);
         }
     }
